@@ -17,7 +17,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 import com.amirmoulavi.watchthatpage.mail.MailService;
-import com.amirmoulavi.watchthatpage.mongo.MongoDBHanlder;
+import com.amirmoulavi.watchthatpage.mongo.MongoDAOImpl;
 import com.amirmoulavi.watchthatpage.resource.ClassResourceLocator;
 import com.amirmoulavi.watchthatpage.security.MessageDigesterBehavior;
 import com.amirmoulavi.watchthatpage.security.MessageDigesterMixin;
@@ -35,7 +35,7 @@ public class PageTrackerMixin implements PageTracker {
 	PageTrackerState state;
 	
 	private static Logger log = Logger.getLogger(PageTrackerMixin.class);
-	private MongoDBHanlder mongo = MongoDBHanlder.getInstance();
+	private MongoDAOImpl mongo = MongoDAOImpl.getInstance();
 
 	private MailService mailService = MailService.getInstance();
 	private List<String> list = new ArrayList<String>();
@@ -91,11 +91,7 @@ public class PageTrackerMixin implements PageTracker {
 		try {
 			int result = client.executeMethod(get);
 			if (result == 200) {
-				String returned_page = get.getResponseBodyAsString();
-				if (mongo.changed(page, messageDigester.MD5(returned_page))) {
-					changedPages.add(page);
-					log.info("******** Page has changed ********");
-				}
+				handlePageChange(changedPages, page, get);
 			}
 		} catch (HttpException e) {
 			log.error(e.getMessage());
@@ -105,9 +101,20 @@ public class PageTrackerMixin implements PageTracker {
 			get.releaseConnection();
 		}
 	}
+
+
+	private void handlePageChange(List<String> changedPages, String page, HttpMethod get) throws IOException {
+		String returned_page = get.getResponseBodyAsString();
+		String digested = messageDigester.MD5(returned_page);
+		if (mongo.changed(page, digested)) {
+			mongo.update(page, digested);
+			changedPages.add(page);
+			log.info("******** Page has changed ********");
+		}
+	}
 	
 	/* INJECTION METHODS */
-	public void setMongo(MongoDBHanlder mongo) {
+	public void setMongo(MongoDAOImpl mongo) {
 		this.mongo = mongo;
 	}
 
