@@ -1,6 +1,5 @@
 package com.amirmoulavi.watchthatpage.plugins;
 
-import org.qi4j.library.constraints.annotation.NotEmpty;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.quartz.StatefulJob;
@@ -15,5 +14,5 @@ import org.quartz.StatefulJob;
 
 public interface PageTrackerBehavior extends StatefulJob {
 	
-	void execute(@NotEmpty JobExecutionContext arg0) throws JobExecutionException;
+	void execute(JobExecutionContext arg0) throws JobExecutionException;
 }

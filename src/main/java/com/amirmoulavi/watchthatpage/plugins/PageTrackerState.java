@@ -1,7 +1,5 @@
 package com.amirmoulavi.watchthatpage.plugins;
 
-import org.qi4j.api.mixin.Mixins;
-import org.qi4j.library.constraints.annotation.NotEmpty;
 
 /**
  * 
@@ -11,12 +9,11 @@ import org.qi4j.library.constraints.annotation.NotEmpty;
  *
  */
 
-@Mixins(PageTrackerStateMixin.class)
 public interface PageTrackerState {
 
-	void logError(@NotEmpty String error);
+	void logError(String error);
 
-	void logInfo(@NotEmpty String info);
+	void logInfo(String info);
 	
 	
 	

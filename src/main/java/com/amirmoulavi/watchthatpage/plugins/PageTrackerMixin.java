@@ -13,7 +13,6 @@ import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.log4j.Logger;
-import org.qi4j.api.injection.scope.This;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
@@ -33,7 +32,7 @@ import com.amirmoulavi.watchthatpage.security.MessageDigesterMixin;
 
 public class PageTrackerMixin implements PageTracker {
 
-	@This PageTrackerState state;
+	PageTrackerState state;
 	
 	private static Logger log = Logger.getLogger(PageTrackerMixin.class);
 	private MongoDBHanlder mongo = MongoDBHanlder.getInstance();

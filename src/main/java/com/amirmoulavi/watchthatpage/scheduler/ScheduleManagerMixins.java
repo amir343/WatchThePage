@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
-import org.qi4j.api.entity.EntityBuilder;
 import org.quartz.CronTrigger;
 import org.quartz.Job;
 import org.quartz.JobDetail;

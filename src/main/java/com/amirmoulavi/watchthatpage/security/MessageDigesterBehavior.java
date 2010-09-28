@@ -1,6 +1,5 @@
 package com.amirmoulavi.watchthatpage.security;
 
-import org.qi4j.api.mixin.Mixins;
 
 /**
  * 
@@ -9,7 +8,6 @@ import org.qi4j.api.mixin.Mixins;
  * @since 0.0.1
  *
  */
-@Mixins(MessageDigesterMixin.class)
 public interface MessageDigesterBehavior {
 
 	String MD5(String message);

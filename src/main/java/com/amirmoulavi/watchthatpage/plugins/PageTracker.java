@@ -1,6 +1,5 @@
 package com.amirmoulavi.watchthatpage.plugins;
 
-import org.qi4j.api.mixin.Mixins;
 
 /**
  * 
@@ -10,7 +9,6 @@ import org.qi4j.api.mixin.Mixins;
  *
  */
 
-@Mixins(PageTrackerMixin.class)
 public interface PageTracker extends PageTrackerBehavior {
 
 }

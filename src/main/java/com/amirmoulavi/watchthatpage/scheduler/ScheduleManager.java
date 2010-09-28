@@ -1,6 +1,5 @@
 package com.amirmoulavi.watchthatpage.scheduler;
 
-import org.qi4j.api.mixin.Mixins;
 
 /**
  * 
@@ -9,7 +8,6 @@ import org.qi4j.api.mixin.Mixins;
  * @since 0.0.1
  *
  */
-@Mixins(ScheduleManagerMixins.class)
 public interface ScheduleManager extends ScheduleBehavior {
 
 }
